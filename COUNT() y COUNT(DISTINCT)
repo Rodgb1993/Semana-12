@@ -1,0 +1,18 @@
+COUNT(*): Cuenta el número total de filas en un conjunto de resultados o dentro de cada grupo.
+
+COUNT(columna): Cuenta el número de filas donde la columna no es nula.
+
+COUNT(DISTINCT columna): Cuenta el número de valores únicos en la columna especificada.
+
+-- Tablas: HumanResources.Employee
+
+SELECT 
+    OrganizationLevel,
+    COUNT(*) AS TotalEmpleados,                                 -- Cuenta todos los empleados en ese nivel
+    COUNT(DISTINCT JobTitle) AS PuestosUnicosEnNivel            -- Cuenta cuántos títulos de puesto diferentes hay
+FROM 
+    HumanResources.Employee
+GROUP BY 
+    OrganizationLevel;
+
+-- Objetivo: Entender la distribución del personal y la variedad de puestos por nivel organizacional.
