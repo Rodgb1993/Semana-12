@@ -1,0 +1,19 @@
+SUM(): Calcula la suma total de los valores en una columna numérica.
+
+
+GROUP BY: Agrupa filas con valores idénticos en columnas específicas (en este caso, TerritoryID) 
+para que la función agregada (SUM()) se aplique a cada grupo.
+
+-- Tablas: Sales.SalesOrderHeader
+
+SELECT 
+    TerritoryID,
+    SUM(SubTotal) AS TotalVentas
+FROM 
+    Sales.SalesOrderHeader
+GROUP BY 
+    TerritoryID
+ORDER BY 
+    TotalVentas DESC;
+
+-- Objetivo: Identificar los territorios más rentables por volumen total de ventas.
