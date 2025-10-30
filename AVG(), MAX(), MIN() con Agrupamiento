@@ -1,0 +1,24 @@
+AVG(): Calcula el promedio de un conjunto de valores.
+
+MAX(): Devuelve el valor máximo de una columna.
+
+MIN(): Devuelve el valor mínimo de una columna.
+
+Estas funciones son fundamentales para obtener insights y métricas significativas. 
+En este ejemplo, usamos INNER JOIN para obtener el nombre de la Categoría, ya que los datos de precio están en una tabla diferente.
+
+-- Tablas: Production.Product, Production.ProductSubcategory, Production.ProductCategory
+
+SELECT 
+    PC.Name AS Categoria,
+    AVG(P.ListPrice) AS PrecioPromedio,
+    MAX(P.ListPrice) AS PrecioMaximo,
+    MIN(P.ListPrice) AS PrecioMinimo
+FROM 
+    Production.Product P
+INNER JOIN 
+    Production.ProductSubcategory PSC ON P.ProductSubcategoryID = PSC.ProductSubcategoryID
+INNER JOIN 
+    Production.ProductCategory PC ON PSC.ProductCategoryID = PC.ProductCategoryID
+GROUP BY 
+    PC.Name;
