@@ -1,0 +1,23 @@
+IN: Permite comparar un valor con una lista de valores o con el resultado de una subconsulta.
+
+YEAR(fecha): Extrae el componente del año de una fecha.
+
+La Subconsulta: En este caso, la subconsulta devuelve un único valor (el año de contratación del VP de Ventas),
+pero IN funciona perfectamente para este propósito.
+
+SELECT 
+    BusinessEntityID, 
+    HireDate,
+    YEAR(HireDate) AS AnioContratacion
+FROM 
+    HumanResources.Employee
+WHERE 
+    YEAR(HireDate) IN (
+        -- Subconsulta: Encuentra el año de contratación del 'Vice President, Sales'
+        SELECT 
+            YEAR(HireDate) 
+        FROM 
+            HumanResources.Employee
+        WHERE 
+            JobTitle = 'Vice President, Sales'
+    );
