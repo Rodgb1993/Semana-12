@@ -1,0 +1,25 @@
+IN: Se utiliza para verificar si un valor está dentro de un conjunto de resultados devuelto por la subconsulta.
+
+YEAR(fecha): Extrae el componente del año de una fecha.
+
+
+GETDATE(): Devuelve la fecha y hora actuales del sistema.
+
+SELECT 
+    SOH.SalesOrderID,
+    SOH.OrderDate,
+    SOH.CustomerID
+FROM 
+    Sales.SalesOrderHeader SOH
+WHERE 
+    SOH.CustomerID IN (
+        -- Subconsulta: Obtiene los IDs de los clientes cuya fecha de creación (ModifiedDate) es anterior al 1 de enero de 2008.
+        SELECT 
+            C.CustomerID 
+        FROM 
+            Sales.Customer C
+        WHERE 
+            YEAR(C.ModifiedDate) < 2008 -- Usa la función YEAR()
+    )
+ORDER BY 
+    SOH.OrderDate DESC;
