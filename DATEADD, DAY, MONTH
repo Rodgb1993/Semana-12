@@ -1,0 +1,19 @@
+MONTH(fecha): Extrae el componente del mes de una fecha (un número del 1 al 12).
+
+DATEADD(unidad, número, fecha): Agrega un número específico de unidades a una fecha.
+
+DAY(fecha): Extrae el número del día del mes.
+
+SELECT 
+    SalesOrderID,
+    OrderDate,
+    -- Extrae el día de la orden.
+    DAY(OrderDate) AS DiaDeLaOrden,
+    -- Proyecta una fecha de envío 7 días después de la OrderDate.
+    DATEADD(DAY, 7, OrderDate) AS FechaEnvioEstimada
+FROM 
+    Sales.SalesOrderHeader
+WHERE 
+    -- Filtra solo las órdenes del mes de Julio (mes 7) para un año reciente (2013).
+    MONTH(OrderDate) = 7
+    AND YEAR(OrderDate) = 2013;
